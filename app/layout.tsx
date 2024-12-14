@@ -14,7 +14,7 @@ const roboto = Roboto({
 
 export const metadata: Metadata = {
   title: "DebtKaaval",
-  description: "Streamline your debt management with CrediThunai",
+  description: "Streamline your debt management with DebtKaaval",
 };
 
 export default function RootLayout({
