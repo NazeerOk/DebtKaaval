@@ -5,7 +5,7 @@ import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import { Box, Fab, InputAdornment, TextField, Typography } from "@mui/material";
 import Link from "next/link";
 import Image from "next/image";
-import customerPic from "../../public/images/customer_card.png";
+import customerPic from "../../../public/images/customer_card.png";
 
 import PersonSearchIcon from "@mui/icons-material/PersonSearch";
 import CustomerInfo from "./CustomerInfo";
@@ -32,7 +32,7 @@ const DummyJSON = [
 ];
 
 const CustomersList = () => {
-  const [customersList] = useState([]);
+  const [customersList] = useState(DummyJSON);
   return (
     <Box
       display={"flex"}
