@@ -1,14 +1,9 @@
 import { Avatar, Box, Typography } from "@mui/material";
 import React from "react";
 import CenteredBox from "../UI/CenteredBox";
+import { CustomerList } from "@/src/types/CustomerList";
 
-type CustomerInfo = {
-  name: string;
-  balance: number | string;
-  date: Date;
-};
-
-const CustomerInfo = ({ balance, date, name }: CustomerInfo) => {
+const CustomerInfo = ({ balance, date, name }: CustomerList) => {
   return (
     <CenteredBox sx={{ justifyContent: "space-between" }}>
       <Box display={"flex"} gap={"20px"}>
@@ -23,7 +18,7 @@ const CustomerInfo = ({ balance, date, name }: CustomerInfo) => {
               month: "2-digit",
               year: "numeric",
             })
-              .format(date)
+              .format(new Date(date))
               .replace(/\//g, "-")}
           </Typography>
         </Box>

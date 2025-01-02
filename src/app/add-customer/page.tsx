@@ -45,7 +45,9 @@ export default function AddCustomer() {
     }));
   };
 
-  const handleSaveBtn = () => {};
+  const handleSaveBtn = () => {
+    console.log(customerDetails);
+  };
 
   return (
     <>

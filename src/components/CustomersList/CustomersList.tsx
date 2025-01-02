@@ -1,38 +1,18 @@
-"use client";
-
-import React, { useState } from "react";
+import React from "react";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import { Box, Fab, InputAdornment, TextField, Typography } from "@mui/material";
+import { Box, Fab, Typography } from "@mui/material";
 import Link from "next/link";
 import Image from "next/image";
 import customerPic from "../../../public/images/customer_card.png";
+import { CustomerList } from "@/src/types/CustomerList";
+import CustomersListSearch from "./CustomersListSearch";
 
-import PersonSearchIcon from "@mui/icons-material/PersonSearch";
-import CustomerInfo from "./CustomerInfo";
+const CustomersList = async () => {
+  const customersListResponse = await fetch(
+    "http://localhost:3000/api/customers-list",
+  );
+  const customersList: CustomerList[] = await customersListResponse.json();
 
-const DummyJSON = [
-  {
-    id: 1,
-    name: "John Doe",
-    balance: "20",
-    date: new Date(new Date().getTime() - 24 * 60 * 60 * 1000),
-  },
-  {
-    id: 2,
-    name: "Alan",
-    balance: "50",
-    date: new Date(),
-  },
-  {
-    id: 3,
-    name: "Victor",
-    balance: "40",
-    date: new Date(new Date().setMonth(11, 1)),
-  },
-];
-
-const CustomersList = () => {
-  const [customersList] = useState(DummyJSON);
   return (
     <Box
       display={"flex"}
@@ -57,26 +37,7 @@ const CustomersList = () => {
           </Typography>
         </Box>
       ) : (
-        <Box>
-          <TextField
-            id="customer-name-search"
-            placeholder="Search Customer"
-            slotProps={{
-              input: {
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <PersonSearchIcon sx={{ color: "blue" }} />
-                  </InputAdornment>
-                ),
-              },
-            }}
-            // variant="filled"
-            sx={{ mb: 2, mt: 2, p: 0 }}
-          />
-          {DummyJSON.map(({ balance, date, id, name }) => (
-            <CustomerInfo key={id} balance={balance} date={date} name={name} />
-          ))}
-        </Box>
+        <CustomersListSearch customersList={customersList} />
       )}
 
       <Box sx={{ alignSelf: "flex-end", marginTop: "auto" }}>
