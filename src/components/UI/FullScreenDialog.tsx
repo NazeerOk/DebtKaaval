@@ -5,17 +5,7 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import CloseIcon from "@mui/icons-material/Close";
-import Slide from "@mui/material/Slide";
-import { TransitionProps } from "@mui/material/transitions";
-
-const Transition = React.forwardRef(function Transition(
-  props: TransitionProps & {
-    children: React.ReactElement<unknown>;
-  },
-  ref: React.Ref<unknown>,
-) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
+import { Transition } from "@/src/utils/helper";
 
 type ChildComponentProps = { handleClose: () => void };
 

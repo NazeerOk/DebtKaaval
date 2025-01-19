@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, forwardRef } from "react";
+import { useState } from "react";
 import Dialog from "@mui/material/Dialog";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
@@ -9,17 +9,7 @@ import Typography from "@mui/material/Typography";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Box, Button, TextField } from "@mui/material";
 import { useRouter } from "next/navigation";
-import Slide from "@mui/material/Slide";
-import { TransitionProps } from "@mui/material/transitions";
-
-const Transition = forwardRef(function Transition(
-  props: TransitionProps & {
-    children: React.ReactElement<unknown>;
-  },
-  ref: React.Ref<unknown>,
-) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
+import { Transition } from "@/src/utils/helper";
 
 type CustomerDetails = {
   name: string;
