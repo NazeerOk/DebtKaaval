@@ -3,6 +3,8 @@ import { Avatar, Box, Fab, TextField, Typography } from "@mui/material";
 import Link from "next/link";
 import React, { useState } from "react";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import { PartyCustomerList } from "@/src/types/CustomerList";
+import { SetState } from "@/src/types/commonTypes";
 
 const PARTIES = [
   {
@@ -15,15 +17,15 @@ const PARTIES = [
   },
 ];
 
-type CustomerList = {
-  id: number;
-  name: string;
+type AddParty = {
+  setSelectedParty: SetState<PartyCustomerList | undefined>;
+  handleClose?: () => void;
 };
 
-const AddParty = () => {
+const AddParty = ({ setSelectedParty, handleClose }: AddParty) => {
   const [searchInput, setSearchInput] = useState("");
 
-  const handleSearchFilter = (customersList: CustomerList[]) => {
+  const handleSearchFilter = (customersList: PartyCustomerList[]) => {
     return customersList.filter((customer) =>
       customer.name?.toLowerCase().includes(searchInput.toLowerCase()),
     );
@@ -53,6 +55,10 @@ const AddParty = () => {
                 marginTop: "10px",
               }}
               key={party.id}
+              onClick={() => {
+                setSelectedParty(party);
+                handleClose?.();
+              }}
             >
               <Avatar sx={{ backgroundColor: "seagreen" }}>
                 {party.name[0]}

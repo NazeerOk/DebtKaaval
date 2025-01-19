@@ -15,6 +15,7 @@ import { SALE_BILL_START_DATE, SALE_BILL_END_DATE } from "../../utils/config";
 import FullScreenDialog from "@/src/components/UI/FullScreenDialog";
 import AddParty from "./AddParty";
 import CenteredBox from "@/src/components/UI/CenteredBox";
+import { PartyCustomerList } from "@/src/types/CustomerList";
 
 const Transition = forwardRef(function Transition(
   props: TransitionProps & {
@@ -30,6 +31,10 @@ type DisplayViewType = "Party" | "Items" | "";
 export default function AddBills() {
   const router = useRouter();
   const [displayView, setDisplayView] = useState<DisplayViewType>("");
+
+  const [selectedParty, setSelectedParty] = useState<
+    PartyCustomerList | undefined
+  >();
 
   const handleSaveBtn = () => {};
 
@@ -97,10 +102,11 @@ export default function AddBills() {
                   justifyContent: "flex-start",
                   paddingLeft: "10px",
                 }}
+                onClick={() => setDisplayView("Party")}
               >
-                <Box onClick={() => setDisplayView("Party")}>
-                  <Typography variant="body1">Search by Customer</Typography>
-                </Box>
+                <Typography variant="body1">
+                  {selectedParty ? selectedParty.name : "Search by Customer"}
+                </Typography>
               </CenteredBox>
               {displayView === "Party" && (
                 <FullScreenDialog
@@ -109,7 +115,7 @@ export default function AddBills() {
                     setDisplayView("");
                   }}
                 >
-                  <AddParty />
+                  <AddParty setSelectedParty={setSelectedParty} />
                 </FullScreenDialog>
               )}
             </Box>

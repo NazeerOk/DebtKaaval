@@ -17,10 +17,12 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
+type ChildComponentProps = { handleClose: () => void };
+
 type FullScreenProps = {
   title: string;
   onClose: () => void;
-  children: React.ReactElement;
+  children: React.ReactElement<ChildComponentProps>;
 };
 
 export default function FullScreenDialog({
@@ -58,7 +60,7 @@ export default function FullScreenDialog({
             </IconButton>
           </Toolbar>
         </AppBar>
-        {children}
+        {React.cloneElement(children, { handleClose })}
       </Dialog>
     </React.Fragment>
   );
