@@ -9,6 +9,7 @@ import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
 import Inventory2Icon from "@mui/icons-material/Inventory2";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { Paper } from "@mui/material";
+import Link from "next/link";
 
 export default function Footer() {
   const [value, setValue] = React.useState(0);
@@ -29,10 +30,14 @@ export default function Footer() {
           <BottomNavigationAction
             label="Parties"
             icon={<GroupsIcon sx={{ color: "blue" }} />}
+            LinkComponent={Link}
+            href="/"
           />
           <BottomNavigationAction
             label="Bills"
             icon={<ReceiptLongIcon sx={{ color: "grey" }} />}
+            LinkComponent={Link}
+            href="/bills"
           />
           <BottomNavigationAction
             label="Items"
