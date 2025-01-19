@@ -9,7 +9,7 @@ import CustomersListSearch from "./CustomersListSearch";
 
 const CustomersList = async () => {
   const customersListResponse = await fetch(
-    "http://localhost:3000/api/customers-list",
+    `${process.env.BASE_URL}/api/customers-list`,
   );
   const customersList: CustomerList[] = await customersListResponse.json();
 

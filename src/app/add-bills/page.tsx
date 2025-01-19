@@ -1,17 +1,20 @@
 "use client";
 
-import { forwardRef } from "react";
+import { forwardRef, useState } from "react";
 import Dialog from "@mui/material/Dialog";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { Box, Button, Divider, TextField } from "@mui/material";
+import { Box, Button, Divider } from "@mui/material";
 import { useRouter } from "next/navigation";
 import Slide from "@mui/material/Slide";
 import { TransitionProps } from "@mui/material/transitions";
 import { SALE_BILL_START_DATE, SALE_BILL_END_DATE } from "../../utils/config";
+import FullScreenDialog from "@/src/components/UI/FullScreenDialog";
+import AddParty from "./AddParty";
+import CenteredBox from "@/src/components/UI/CenteredBox";
 
 const Transition = forwardRef(function Transition(
   props: TransitionProps & {
@@ -22,8 +25,11 @@ const Transition = forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function AddCustomer() {
+type DisplayViewType = "Party" | "Items" | "";
+
+export default function AddBills() {
   const router = useRouter();
+  const [displayView, setDisplayView] = useState<DisplayViewType>("");
 
   const handleSaveBtn = () => {};
 
@@ -82,12 +88,30 @@ export default function AddCustomer() {
           <Box>
             <Typography component={"span"}>Bill To</Typography>
             <Box>
-              <TextField
-                label="Search by Customer"
-                variant="outlined"
-                fullWidth
-                disabled
-              />
+              <CenteredBox
+                sx={{
+                  width: "100%",
+                  border: "2px solid rgba(0, 0, 0, 0.23)",
+                  height: "50px",
+                  borderRadius: "3%",
+                  justifyContent: "flex-start",
+                  paddingLeft: "10px",
+                }}
+              >
+                <Box onClick={() => setDisplayView("Party")}>
+                  <Typography variant="body1">Search by Customer</Typography>
+                </Box>
+              </CenteredBox>
+              {displayView === "Party" && (
+                <FullScreenDialog
+                  title="Add Party"
+                  onClose={() => {
+                    setDisplayView("");
+                  }}
+                >
+                  <AddParty />
+                </FullScreenDialog>
+              )}
             </Box>
           </Box>
         </Box>
